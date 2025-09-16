@@ -95,8 +95,6 @@ plt.tight_layout()
 
 if not os.path.exists('statis'):
     os.makedirs('static')
-else:
-    print("Caminho ja salvo!")
     
 plt.savefig("static/grafico_evolucao.png")
 
