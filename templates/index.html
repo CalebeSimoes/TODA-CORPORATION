@@ -1,18 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grafico</title>
+    <title>Previsão do Bitcoin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>
-            Graficos do Calebinho
-        </h1>
+        <h1>Análise de Preço do Bitcoin</h1>
     </header>
-    <nav>
-        <img src="{{ url_for('static', filename='grafico_evolucao.png') }}" alt="Gráfico de Evolução do Preço do Bitcoin">
-    </nav>
+
+    <main>
+        <section class="graph-container">
+            <h2>Evolução Histórica e Média Móvel</h2>
+            <div class="grafico">
+                <img src="{{ url_for('static', filename='grafico_evolucao.png') }}" alt="Gráfico de Evolução do Preço do Bitcoin">
+            </div>
+        </section>
+
+        <section class="prediction-container">
+            <h2>Ferramenta de Previsão</h2>
+            <form id="prediction-form" action="#" method="post">
+                <label for="prediction-date">Escolha a data da previsão:</label>
+                <input type="date" id="prediction-date" name="prediction-date" required>
+                <button type="submit">Prever Preço</button>
+            </form>
+            <p id="prediction-result"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Projeto de Análise de Dados e Machine Learning</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
