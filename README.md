@@ -15,6 +15,7 @@ Machine Learning: Treina um modelo de Regressão Linear para prever o preço fut
 Aplicação Web: Uma interface simples e funcional construída com Flask que exibe o gráfico de análise e permite ao usuário inserir uma data para obter uma previsão de preço.
 
 🛠️ Tecnologias Utilizadas
+
 Python
 
 requests: Para fazer requisições à API.
@@ -28,3 +29,11 @@ matplotlib & seaborn: Para a criação das visualizações.
 scikit-learn & joblib: Para o treinamento e salvamento do modelo de Machine Learning.
 
 Flask: Para a criação da aplicação web.
+
+Front-end
+
+HTML: Para estruturar a página e o formulário.
+
+CSS: Para estilizar a interface.
+
+JavaScript: Para a lógica interativa, validação da data e comunicação com a API.
