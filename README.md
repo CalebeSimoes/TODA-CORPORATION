@@ -1,6 +1,4 @@
-Excelente ideia! Um bom arquivo README.md é essencial para apresentar o seu projeto. Ele serve como uma documentação e um guia para qualquer pessoa que queira entender ou rodar o seu código.
 
-Aqui está uma sugestão de README, completa e bem organizada, que você pode copiar e colar no seu projeto.
 
 Análise e Previsão de Preço do Bitcoin com Python
 Este projeto é uma ferramenta de análise de dados completa que coleta, processa, visualiza e prevê o preço do Bitcoin utilizando um modelo de Machine Learning e uma aplicação web simples.
