@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - TODA Corporation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="header-logo">
+                <a href="index.html">
+                    <img src="Toda_logo.png" alt="TODA Corporation Logo" id="Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="sobre.html">Sobre a TODA</a></li>
+                    <li><a href="#">Áreas de Atuação</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                    <li><a href="#">Notícias</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section contact-section">
+            <div class="container">
+                <h2>Fale Conosco e Receba Nossas Novidades</h2>
+                <p>Envie sua mensagem ou cadastre seu e-mail para receber as últimas notícias e atualizações da TODA Corporation.</p>
+                
+                <div class="contact-form-container">
+                    <form action="#" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nome:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem (opcional):</label>
+                            <textarea id="message" name="message" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar</button>
+                    </form>
+                    
+                    <div class="form-divider">ou</div>
+                    
+                    <form action="#" method="POST" class="newsletter-form">
+                        <div class="form-group">
+                            <label for="newsletter-email">Assine nossa Newsletter:</label>
+                            <input type="email" id="newsletter-email" name="newsletter-email" placeholder="seu.email@exemplo.com" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Assinar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+    <footer class="main-footer">
+        </footer>
+
+</body>
+</html>

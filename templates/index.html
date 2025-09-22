@@ -3,37 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Previsão do Bitcoin</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>TODA CORPORATION</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Análise de Preço do Bitcoin</h1>
+
+    <header class="main-header">
+        <div class="container">
+            <div class="header-logo">
+                <a href="/">
+                    <img src="Toda_logo.png" alt="TODA Corporation Logo" id="Logo">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="sobre.html">Sobre a TODA</a></li>
+                    <li><a href="#">Áreas de Atuação</a></li>
+                    <li><a href="#">Sustentabilidade</a></li>
+                    <li><a href="#">Notícias</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <main>
-        <section class="graph-container">
-            <h2>Evolução Histórica e Média Móvel</h2>
-            <div class="grafico">
-                <img src="{{ url_for('static', filename='grafico_evolucao.png') }}" alt="Gráfico de Evolução do Preço do Bitcoin">
+        <section class="hero-section">
+            <div class="hero-text">
+                <h1>Construindo o Futuro, Juntos.</h1>
+                <p>Soluções inovadoras para um mundo em constante evolução.</p>
             </div>
         </section>
 
-        <section class="prediction-container">
-            <h2>Ferramenta de Previsão</h2>
-            <form id="prediction-form" action="#" method="post">
-                <label for="prediction-date">Escolha a data da previsão:</label>
-                <input type="date" id="prediction-date" name="prediction-date" required>
-                <button type="submit">Prever Preço</button>
-            </form>
-            <p id="prediction-result"></p>
+        <section class="content-section about-section">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>Sobre a TODA CORPORATION</h2>
+                        <p>
+                            A TODA é uma empresa líder no mercado, com uma longa história de excelência e compromisso. Nosso objetivo é fornecer soluções de alta qualidade que atendam às necessidades de nossos clientes e contribuam para o desenvolvimento da sociedade.
+                        </p>
+                        <a href="sobre.html" class="btn-primary">Saiba mais</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="ventilador.jpg" alt="Imagem institucional">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section services-section">
+            <div class="container">
+                <h2>Áreas de Atuação</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <img src="brickwall_632981.png" alt="Ícone de Construção">
+                        </div>
+                        <h3>Construção Civil</h3>
+                        <p>Projetos residenciais, comerciais e industriais com foco em inovação e segurança.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <img src="settings_4635386.png" alt="Ícone de Infraestrutura">
+                        </div>
+                        <h3>Infraestrutura</h3>
+                        <p>Construção de estradas, pontes e sistemas de transporte para conectar pessoas.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="card-icon">
+                            <img src="electricity_13165880.png" alt="Ícone de Energia">
+                        </div>
+                        <h3>Energia e Recursos</h3>
+                        <p>Soluções sustentáveis e eficientes para o setor de energia e recursos naturais.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section map-section">
+            <div class="container">
+                <h2>Nossa Localização</h2>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.7667087677133!2d-46.6669913!3d-23.577903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c193e29f03%3A0xc3f124c6df73236e!2sR.%20Manuel%20da%20N%C3%B3brega%2C%201280%20-%20Para%C3%ADso%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2004001-902!5e0!3m2!1spt-BR!2sbr!4v1714571020294!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>Projeto de Análise de Dados e Machine Learning</p>
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="#">Áreas de Atuação</a></li>
+                        <li><a href="#">Notícias</a></li>
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <p>Rua Manuel da Nóbrega, 1280 - 3 Andar<br>São Paulo, SP</p>
+                    <p>Telefone: 55 11 3886-5844</p>
+                    <p>Email: contato@toda.com.br</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Siga-nos</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/toda.corporation/">Facebook</a>
+                        <a href="https://www.linkedin.com/company/toda-investimentos-do-brasil/posts/?feedView=all">LinkedIn</a>
+                        <a href="https://www.toda.co.jp/english/project/brazil.php">Site Oficial</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TODA CORPORATION. Todos os direitos reservados.</p>
+            </div>
+        </div>
     </footer>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="script.js"></script>
 </body>
 </html>
