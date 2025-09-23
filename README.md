@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 Análise e Previsão de Preço do Bitcoin com Python
@@ -37,3 +38,6 @@ HTML: Para estruturar a página e o formulário.
 CSS: Para estilizar a interface.
 
 JavaScript: Para a lógica interativa, validação da data e comunicação com a API.
+=======
+# TODA-CORPORATION
+>>>>>>> d0c327675918d8ebfe4fbee722bc6d0422beb50f
