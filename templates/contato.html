@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - TODA Corporation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -12,17 +12,17 @@
     <header class="main-header">
         <div class="container">
             <div class="header-logo">
-                <a href="index.html">
-                    <img src="Toda_logo.png" alt="TODA Corporation Logo" id="Logo">
+                <a href="{{ url_for('home') }}">
+                    <img src="{{ url_for('static', filename= 'Toda_logo.png')}}" alt="TODA Corporation Logo" id="Logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="sobre.html">Sobre a TODA</a></li>
+                    <li><a href="{{ url_for('sobre') }}">Sobre a TODA</a></li>
                     <li><a href="#">Áreas de Atuação</a></li>
                     <li><a href="#">Sustentabilidade</a></li>
                     <li><a href="#">Notícias</a></li>
-                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="{{ url_for('contato') }}">Contato</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" aria-label="Abrir menu">

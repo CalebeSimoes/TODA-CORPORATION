@@ -417,3 +417,10 @@ h2 {
         margin: 20px 0;
     }
 }
+.dashboard-interative{
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+
+}

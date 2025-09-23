@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TODA CORPORATION</title>
-    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}TODA CORPORATION {% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -13,16 +13,16 @@
         <div class="container">
             <div class="header-logo">
                 <a href="/">
-                    <img src="Toda_logo.png" alt="TODA Corporation Logo" id="Logo">
+                    <img src="{{ url_for('static', filename= 'Toda_logo.png')}}" alt="TODA Corporation Logo" id="Logo">
                 </a>
             </div>
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="sobre.html">Sobre a TODA</a></li>
+                    <li><a href="{{ url_for('sobre') }}">Sobre a TODA</a></li>
                     <li><a href="#">Áreas de Atuação</a></li>
                     <li><a href="#">Sustentabilidade</a></li>
                     <li><a href="#">Notícias</a></li>
-                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="{{ url_for('contato') }}">Contato</a></li>
                 </ul>
             </nav>
             <button class="menu-toggle" aria-label="Abrir menu">
@@ -34,10 +34,17 @@
     </header>
 
     <main>
+        {% block content %}
         <section class="hero-section">
             <div class="hero-text">
                 <h1>Construindo o Futuro, Juntos.</h1>
                 <p>Soluções inovadoras para um mundo em constante evolução.</p>
+            </div>
+        </section>
+        <section class="dashboard-interative">
+            <div class="dashboard-text">
+                <h1>Dashboard dos lucros conquistados nos ultimos 5 anos</h1>
+                <div class="dashboard-conteiner"></div>
             </div>
         </section>
 
@@ -52,7 +59,7 @@
                         <a href="sobre.html" class="btn-primary">Saiba mais</a>
                     </div>
                     <div class="about-image">
-                        <img src="ventilador.jpg" alt="Imagem institucional">
+                        <img src="{{ url_for('static', filename= 'ventilador.jpg')}}" alt="Imagem institucional">
                     </div>
                 </div>
             </div>
@@ -64,21 +71,21 @@
                 <div class="services-grid">
                     <div class="service-card">
                         <div class="card-icon">
-                            <img src="brickwall_632981.png" alt="Ícone de Construção">
+                            <img src="{{ url_for('static', filename='brickwall_632981.png')}}" alt="Ícone de Construção">
                         </div>
                         <h3>Construção Civil</h3>
                         <p>Projetos residenciais, comerciais e industriais com foco em inovação e segurança.</p>
                     </div>
                     <div class="service-card">
                         <div class="card-icon">
-                            <img src="settings_4635386.png" alt="Ícone de Infraestrutura">
+                            <img src="{{ url_for('static', filename='settings_4635386.png')}}" alt="Ícone de Infraestrutura">
                         </div>
                         <h3>Infraestrutura</h3>
                         <p>Construção de estradas, pontes e sistemas de transporte para conectar pessoas.</p>
                     </div>
                     <div class="service-card">
                         <div class="card-icon">
-                            <img src="electricity_13165880.png" alt="Ícone de Energia">
+                            <img src="{{ url_for('static', filename='electricity_13165880.png')}}" alt="Ícone de Energia">
                         </div>
                         <h3>Energia e Recursos</h3>
                         <p>Soluções sustentáveis e eficientes para o setor de energia e recursos naturais.</p>
@@ -95,6 +102,7 @@
                 </div>
             </div>
         </section>
+        {% endblock %}
     </main>
 
     <footer class="main-footer">

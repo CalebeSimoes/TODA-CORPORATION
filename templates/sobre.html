@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre a TODA Corporation</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,7 +22,7 @@
                 <p>
                     Nossa equipe é formada por profissionais apaixonados e dedicados, que trabalham incansavelmente para superar as expectativas dos clientes. Ao longo dos anos, diversificamos nossas áreas de atuação para incluir energia e recursos, sempre com o objetivo de oferecer soluções que contribuam para o bem-estar da sociedade e a preservação do meio ambiente.
                 </p>
-                <a href="index.html" class="btn-primary">Voltar para a Home</a>
+                <a href="{{ url_for('home') }}" class="btn-primary">Voltar para a Home</a>
             </div>
         </section>
     </main>
