@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Insights - TODA CORPORATION{% endblock %}
+
+{% block content %}
+<section class="content-section">
+    <div class="container" style="text-align: center;">
+        <h2>Visualizar Lucros por Ano</h2>
+        <p>Selecione um ano para visualizar o dashboard de lucros.</p>
+        
+        <div class="form-container" style="max-width: 500px; margin: 40px auto; padding: 20px; background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+            <form action="{{ url_for('dashboard') }}" method="post">
+                <div class="form-group">
+                    <label for="ano_selecionado">Escolha o ano:</label>
+                    <select id="ano_selecionado" name="ano_selecionado" class="form-control" style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #ccc;">
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Visualizar Dashboard</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

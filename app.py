@@ -15,5 +15,9 @@ def sobre():
 def contato():
     return render_template("contato.html")
 
+@app.route("/insight")
+def insight():
+    return render_template("insight.html")
+
 if __name__ == '__main__':
     app.run(debug=True)

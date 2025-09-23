@@ -424,3 +424,20 @@ h2 {
         text-align: center;
 
 }
+
+
+/* CSS */
+.button-33 {
+    display: inline-block;
+    background-color: transparent; /* Fundo transparente */
+    color: #ff9800; /* Texto com a cor primária */
+    border: 2px solid #ff9800; /* Contorno com a cor primária */
+    padding: 10px 22px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-33:hover {
+    background-color: #ff9800; /* Fundo preenchido ao passar o mouse */
+    color: #fff; /* Texto branco ao passar o mouse */
+}
