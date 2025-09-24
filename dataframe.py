@@ -3,6 +3,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.model_selection import train_test_split
 
  # variaveis
 inicio = '2020-01-01'
@@ -10,8 +11,8 @@ fim = '2024-12-31'
 data = pd.date_range(inicio, fim)
 direcao_do_vento = [0 , 90, 180, 270] 
 preco_venda_mwh = 195
-custo_fixo_mensal = 18525
-impostos = 35.65
+custo_fixo_anual = 222300
+impostos_anual = 427,8
 random.seed(42)
 
 # meu dataframe
@@ -41,13 +42,13 @@ resultados = [
 # alterações e criacao de mais variaveis
 df['ENERGIA_GERADA'] = np.select(condicoes, resultados, default=0)
 df['DATA'] = pd.to_datetime(df['DATA'])
-data_2023_inicio = "2023-01-01"
-data_2023_fim = "2023-12-31"
-data_2023 = df[(df['DATA'] >= data_2023_inicio) & (df['DATA'] <= data_2023_fim)]
-df_media_energia = df['ENERGIA_GERADA'].mean()
+df['ANO'] = df['DATA'].dt.year
 
+energia_gerada = df.groupby('ANO')['ENERGIA_GERADA'].sum().reset_index()
 df_agregado = df.groupby('VEL_VENTO')['ENERGIA_GERADA'].mean().reset_index()
+energia_gerada['FATURAMENTO_BRUTO'] = energia_gerada['ENERGIA_GERADA'] * preco_venda_mwh
 
+deducao_imposto = energia_gerada['FATURAMENTO_BRUTO'] / impostos_anual * 100
 
 
 
@@ -108,7 +109,21 @@ plt.grid(True, linestyle='--', alpha=0.6)
 plt.xticks(np.arange(0, 31, 2))
 plt.legend(loc='upper left')
 plt.tight_layout()
-plt.show()
+
+
+
+print(deducao_imposto)
+
+#X = df['DATA']
+#y = df['ENERGIA_GERADA']
+
+#X_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+
+
+
+
+
 
 
 
