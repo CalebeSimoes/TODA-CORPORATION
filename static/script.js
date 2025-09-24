@@ -29,27 +29,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-    // Processa os dados recebidos do backend
-    console.log('Dados do dashboard recebidos:', data);
-    
-    // Seleciona o contêiner onde o dashboard será exibido
+    // Seleciona o contêiner do dashboard
     const dashboardContainer = document.querySelector('.dashboard-conteiner');
-    
-    // Verifica se o contêiner existe antes de tentar modificar o HTML
+
     if (dashboardContainer) {
-        // Formata o faturamento líquido para um formato de moeda (R$ 24.558.972,35)
+        // Formata o faturamento líquido
         const faturamentoFormatado = new Intl.NumberFormat('pt-BR', {
             style: 'currency',
             currency: 'BRL'
         }).format(data.faturamento_liquido);
 
-        // Atualiza o conteúdo HTML do contêiner dinamicamente
+        // Atualiza o conteúdo HTML
         dashboardContainer.innerHTML = `
             <h3>Dashboard do Ano ${data.ano}</h3>
             <p>Faturamento Líquido: ${faturamentoFormatado}</p>
             <img src="${data.grafico_mensal}" alt="Gráfico de Faturamento Mensal">
             <img src="${data.grafico_anual}" alt="Gráfico de Faturamento Anual">
         `;
+
+        // Adiciona a classe 'visible' para ativar a transição
+        dashboardContainer.classList.add('visible');
     }
 })
             .catch(error => {

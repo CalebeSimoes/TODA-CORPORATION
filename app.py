@@ -80,6 +80,5 @@ def dashboard():
     })
 
 if __name__ == '__main__':
-    # O código de geração de gráficos no seu dataframe.py precisa ser executado apenas uma vez.
-    # Remova as chamadas `plt.show()` do dataframe.py, pois elas bloqueiam a execução do servidor.
+    
     app.run(debug=True)
