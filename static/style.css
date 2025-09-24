@@ -48,7 +48,7 @@ a:hover {
     transition: background-color 0.3s;
 }
 
-.btn-primary:hover {
+.btn-primary :hover {
     background-color: #f57c00;
 }
 
