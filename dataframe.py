@@ -4,7 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-import matplotlib.ticker as mticker # Para formatar o eixo Y com moeda
+import matplotlib.ticker as mticker
+from sklearn.linear_model import SGDRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import make_pipeline
 
 # --- 1. Variáveis e Configurações ---
 inicio = '2020-01-01'
@@ -183,3 +186,33 @@ for ano in sorted(anos_unicos):
 
 print("Faturamento Líquido por Ano:")
 print(energia_gerada[['FATURAMENTO_LIQUIDO', 'ANO']].style.format({'FATURAMENTO_LIQUIDO': 'R$ {:,.2f}'}))
+
+df_media_vel_vento = df.groupby('ANO').agg(VEL_VENTO_MEDIO=('VEL_VENTO', 'mean')).reset_index()
+df_media_temp_ar = df.groupby('ANO').agg(TEMP_AR_MEDIO=('TEMP_AR', 'mean')).reset_index()
+df_dir_mais_comum = df.groupby('ANO').agg(DIRECAO_VENTO_MAIS_COMUM=('DIRECAO_VENTO', lambda x: x.mode()[0])).reset_index()
+
+
+
+features_anuais = pd.merge(df_media_vel_vento, df_media_temp_ar, on='ANO')
+features_anuais = pd.merge(features_anuais, df_dir_mais_comum, on='ANO')
+
+
+X_train = features_anuais[['VEL_VENTO_MEDIO', 'TEMP_AR_MEDIO', 'DIRECAO_VENTO_MAIS_COMUM']]
+y_train = energia_gerada['FATURAMENTO_LIQUIDO']
+
+
+modelo_sgd_reg = make_pipeline(StandardScaler(), SGDRegressor(loss='squared_error', max_iter=1000, tol=1e-3))
+modelo_sgd_reg.fit(X_train, y_train)
+
+
+dados_para_prever_2025 = pd.DataFrame({
+    'VEL_VENTO_MEDIO': [features_anuais['VEL_VENTO_MEDIO'].mean()],
+    'TEMP_AR_MEDIO': [features_anuais['TEMP_AR_MEDIO'].mean()],
+    'DIRECAO_VENTO_MAIS_COMUM': [features_anuais['DIRECAO_VENTO_MAIS_COMUM'].mode()[0]]
+})
+
+previsao_faturamento_2025 = modelo_sgd_reg.predict(dados_para_prever_2025)
+
+
+print("Previsão de Faturamento para 2025:")
+print(f"R$ {previsao_faturamento_2025[0]}")
