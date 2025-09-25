@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="google" content="notranslate">
     <title>{% block title %}TODA CORPORATION {% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -139,5 +140,99 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.main-nav');
+    
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+        });
+    }
+
+    const dashboardButton = document.querySelector('.btn-dash');
+
+    if (dashboardButton) {
+        dashboardButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const anoSelecionado = document.getElementById('ano_selecionado').value;
+            
+            console.log('📊 Buscando dados para o ano:', anoSelecionado);
+
+            fetch('/insight', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'ano_selecionado=' + encodeURIComponent(anoSelecionado)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('✅ Dados recebidos:', data);
+                
+                // ✅ CORREÇÃO: Use o ID correto
+                const dashboardContainer = document.getElementById('dashboardResults');
+                
+                if (dashboardContainer) {
+                    console.log('✅ Container encontrado!');
+                    
+                    // Formata o faturamento líquido
+                    const faturamentoFormatado = new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }).format(data.faturamento_liquido);
+
+                    // Atualiza o conteúdo HTML
+                    dashboardContainer.innerHTML = `
+                        <div class="dashboard-result">
+                            <h3>📈 Dashboard do Ano ${data.ano}</h3>
+                            <p class="faturamento-total">💰 Faturamento Líquido: <strong>${faturamentoFormatado}</strong></p>
+                            <div class="graficos-container">
+                                <div class="grafico-item">
+                                    <h4>📅 Faturamento Mensal</h4>
+                                    <img src="${data.grafico_mensal}" alt="Gráfico de Faturamento Mensal ${data.ano}">
+                                </div>
+                                <div class="grafico-item">
+                                    <h4>📊 Faturamento Anual Comparativo</h4>
+                                    <img src="${data.grafico_anual}" alt="Gráfico de Faturamento Anual">
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    dashboardContainer.classList.add('visible');
+                    console.log('✅ Dashboard atualizado com sucesso!');
+                } else {
+                    console.error('❌ Container não encontrado!');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Erro ao buscar o dashboard:', error);
+                const dashboardContainer = document.getElementById('dashboardResults');
+                if (dashboardContainer) {
+                    dashboardContainer.innerHTML = `
+                        <div class="error-message">
+                            <p>❌ Ocorreu um erro ao carregar o dashboard:</p>
+                            <p><strong>${error.message}</strong></p>
+                            <p>Tente novamente mais tarde.</p>
+                        </div>
+                    `;
+                }
+            });
+        });
+    } else {
+        console.error('❌ Botão do dashboard não encontrado!');
+    }
+});
+    </script>
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

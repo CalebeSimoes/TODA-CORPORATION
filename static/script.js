@@ -1,63 +1,88 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.main-nav');
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-        });
-    }
+    console.log('✅ JavaScript carregado na página insight.html');
+    
+    const form = document.getElementById('dashboardForm');
+    const resultadoContainer = document.getElementById('dashboardResults');
 
-    const dashboardButton = document.querySelector('.btn-dash');
-    const formElement = document.querySelector('.form-container form');
-
-    if (dashboardButton && formElement) {
-        dashboardButton.addEventListener('click', function(event) {
+    if (form && resultadoContainer) {
+        form.addEventListener('submit', function(event) {
             event.preventDefault();
-
-            const formData = new FormData(formElement);
             
-            console.log('Ano Selecionado:', formData.get('ano_selecionado'));
+            const anoSelecionado = document.getElementById('ano_selecionado').value;
+            console.log('📊 Enviando requisição para ano:', anoSelecionado);
 
-            fetch('/dashboard', { // Altere a rota aqui
+            // Mostrar loading
+            resultadoContainer.innerHTML = '<p>⏳ Carregando dados...</p>';
+
+            fetch('/insight', {
                 method: 'POST',
-                body: formData,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'ano_selecionado=' + encodeURIComponent(anoSelecionado)
             })
             .then(response => {
+                console.log('📞 Resposta do servidor:', response.status);
+                
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    // Tenta obter mais detalhes do erro
+                    return response.text().then(text => {
+                        throw new Error(`Erro ${response.status}: ${text}`);
+                    });
                 }
                 return response.json();
             })
             .then(data => {
-    // Seleciona o contêiner do dashboard
-    const dashboardContainer = document.querySelector('.dashboard-conteiner');
-
-    if (dashboardContainer) {
-        // Formata o faturamento líquido
-        const faturamentoFormatado = new Intl.NumberFormat('pt-BR', {
-            style: 'currency',
-            currency: 'BRL'
-        }).format(data.faturamento_liquido);
-
-        // Atualiza o conteúdo HTML
-        dashboardContainer.innerHTML = `
-            <h3>Dashboard do Ano ${data.ano}</h3>
-            <p>Faturamento Líquido: ${faturamentoFormatado}</p>
-            <img src="${data.grafico_mensal}" alt="Gráfico de Faturamento Mensal">
-            <img src="${data.grafico_anual}" alt="Gráfico de Faturamento Anual">
-        `;
-
-        // Adiciona a classe 'visible' para ativar a transição
-        dashboardContainer.classList.add('visible');
-    }
-})
-            .catch(error => {
-                console.error('Erro ao buscar o dashboard:', error);
-                const dashboardContainer = document.querySelector('.dashboard-conteiner');
-                if (dashboardContainer) {
-                    dashboardContainer.innerHTML = `<p style="color: red;">Ocorreu um erro ao carregar o dashboard. Tente novamente mais tarde.</p>`;
+                console.log('✅ Dados recebidos com sucesso:', data);
+                
+                // Verifica se há erro na resposta
+                if (data.error) {
+                    throw new Error(data.error);
                 }
+                
+                // Formatar o faturamento
+                const faturamentoFormatado = new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                }).format(data.faturamento_liquido);
+
+                // Atualizar a interface
+                resultadoContainer.innerHTML = `
+    <div class="dashboard-result">
+        <h3>${titulo}</h3>
+        <p class="faturamento-total">💰 Faturamento Líquido: <strong>${faturamentoFormatado}</strong></p>
+        ${observacao}
+        
+        <!-- ✅ PRIMEIRO GRÁFICO MAIOR (MENSAL) -->
+        <div class="grafico-destaque">
+            <h4>📅 ${data.tipo === 'previsao' ? 'Previsão Mensal' : 'Faturamento Mensal'} - ${data.ano}</h4>
+            <img src="${data.grafico_mensal}?t=${new Date().getTime()}" alt="Gráfico Mensal" class="grafico-grande">
+        </div>
+        
+        <!-- ✅ SEGUNDO GRÁFICO (ANUAL) -->
+        <div class="grafico-secundario">
+            <h4>📊 Comparativo Anual</h4>
+            <img src="${data.grafico_anual}?t=${new Date().getTime()}" alt="Gráfico Anual">
+        </div>
+    </div>
+`;
+                
+                resultadoContainer.classList.add('visible');
+            })
+            .catch(error => {
+                console.error('❌ Erro completo:', error);
+                resultadoContainer.innerHTML = `
+                    <div class="error-message">
+                        <p>❌ Ocorreu um erro ao carregar o dashboard</p>
+                        <p><strong>${error.message}</strong></p>
+                        <p>Verifique o terminal do Flask para mais detalhes.</p>
+                    </div>
+                `;
             });
         });
+    } else {
+        console.error('❌ Formulário ou container não encontrado');
+        if (!form) console.error('Formulário com ID dashboardForm não encontrado');
+        if (!resultadoContainer) console.error('Container com ID dashboardResults não encontrado');
     }
 });

@@ -9,7 +9,9 @@ from sklearn.linear_model import SGDRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
 import os 
+import matplotlib
 
+matplotlib.use('Agg')
 
 inicio = '2020-01-01'
 fim = '2024-12-31'

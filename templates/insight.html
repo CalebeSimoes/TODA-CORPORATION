@@ -5,8 +5,9 @@
     <div class="container">
         <h2>Dashboard Interativo de Lucros</h2>
         <p>Selecione um ano para visualizar o dashboard de lucros com detalhes mensais.</p>
+        
         <div class="form-container">
-            <form action="" method="post">
+            <form id="dashboardForm" method="post">
                 <div class="form-group">
                     <label for="ano_selecionado">Escolha o ano:</label>
                     <select id="ano_selecionado" name="ano_selecionado" class="form-control">
@@ -20,13 +21,17 @@
                 </div>
                 <button type="submit" class="btn-dash btn-primary">Visualizar Dashboard</button>
             </form>
-            <div class="dashboard-conteiner">
-                </div>
+        </div>
+
+        <!-- Container para os resultados -->
+        <div class="dashboard-conteiner" id="dashboardResults">
+            <!-- Os gráficos e dados aparecerão aqui via JavaScript -->
         </div>
     </div>
 </section>
 {% endblock %}
 
 {% block scripts %}
+<!-- ✅ AGORA O JavaScript SERÁ CARREGADO -->
 <script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}
