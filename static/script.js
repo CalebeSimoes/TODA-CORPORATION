@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ JavaScript carregado na página insight.html');
+    console.log('JavaScript carregado na página insight.html');
     
     const form = document.getElementById('dashboardForm');
     const resultadoContainer = document.getElementById('dashboardResults');
@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
             event.preventDefault();
             
             const anoSelecionado = document.getElementById('ano_selecionado').value;
-            console.log('📊 Enviando requisição para ano:', anoSelecionado);
+            console.log(' Enviando requisição para ano:', anoSelecionado);
 
             // Mostrar loading
-            resultadoContainer.innerHTML = '<p>⏳ Carregando dados...</p>';
+            resultadoContainer.innerHTML = '<p> Carregando dados...</p>';
 
             fetch('/insight', {
                 method: 'POST',
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: 'ano_selecionado=' + encodeURIComponent(anoSelecionado)
             })
             .then(response => {
-                console.log('📞 Resposta do servidor:', response.status);
+                console.log(' Resposta do servidor:', response.status);
                 
                 if (!response.ok) {
                     // Tenta obter mais detalhes do erro
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                console.log('✅ Dados recebidos com sucesso:', data);
+                console.log(' Dados recebidos com sucesso:', data);
                 
                 // Verifica se há erro na resposta
                 if (data.error) {
@@ -50,18 +50,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultadoContainer.innerHTML = `
     <div class="dashboard-result">
         <h3>${titulo}</h3>
-        <p class="faturamento-total">💰 Faturamento Líquido: <strong>${faturamentoFormatado}</strong></p>
+        <p class="faturamento-total"> Faturamento Líquido: <strong>${faturamentoFormatado}</strong></p>
         ${observacao}
         
-        <!-- ✅ PRIMEIRO GRÁFICO MAIOR (MENSAL) -->
+        <!--  PRIMEIRO GRÁFICO MAIOR (MENSAL) -->
         <div class="grafico-destaque">
-            <h4>📅 ${data.tipo === 'previsao' ? 'Previsão Mensal' : 'Faturamento Mensal'} - ${data.ano}</h4>
+            <h4> ${data.tipo === 'previsao' ? 'Previsão Mensal' : 'Faturamento Mensal'} - ${data.ano}</h4>
             <img src="${data.grafico_mensal}?t=${new Date().getTime()}" alt="Gráfico Mensal" class="grafico-grande">
         </div>
         
-        <!-- ✅ SEGUNDO GRÁFICO (ANUAL) -->
+        <!--  SEGUNDO GRÁFICO (ANUAL) -->
         <div class="grafico-secundario">
-            <h4>📊 Comparativo Anual</h4>
+            <h4> Comparativo Anual</h4>
             <img src="${data.grafico_anual}?t=${new Date().getTime()}" alt="Gráfico Anual">
         </div>
     </div>
@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultadoContainer.classList.add('visible');
             })
             .catch(error => {
-                console.error('❌ Erro completo:', error);
+                console.error(' Erro completo:', error);
                 resultadoContainer.innerHTML = `
                     <div class="error-message">
-                        <p>❌ Ocorreu um erro ao carregar o dashboard</p>
+                        <p> Ocorreu um erro ao carregar o dashboard</p>
                         <p><strong>${error.message}</strong></p>
                         <p>Verifique o terminal do Flask para mais detalhes.</p>
                     </div>
@@ -81,8 +81,25 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     } else {
-        console.error('❌ Formulário ou container não encontrado');
+        console.error(' Formulário ou container não encontrado');
         if (!form) console.error('Formulário com ID dashboardForm não encontrado');
         if (!resultadoContainer) console.error('Container com ID dashboardResults não encontrado');
     }
+});
+
+// Header dinâmico ao scroll
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.main-header');
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// Fechar menu mobile ao clicar em um link
+document.querySelectorAll('.main-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.main-nav').classList.remove('active');
+    });
 });
