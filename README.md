@@ -5,9 +5,7 @@
 
 **Dashboard de Previsão de Lucro para Energia Eólica**
 
-\<p align="center"\>
-\<img src="assets/Capturar.PNG" alt="Imagem do projeto" width="600"/\>
-\</p\>
+
 
 ## Sobre o Projeto
 
